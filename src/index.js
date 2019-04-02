@@ -15,12 +15,13 @@ import {
  
 } from 'react-router-dom'
 import AuthRoute from './component/authroute/authroute'
-
+import './index.css'
 import './config'
 import Login from './container/login/login';
-import Register from './container/register/register';
+import newRegister from './container/register/register';
+import reducers from './reducers'
 
-const store = createStore(compose(
+const store = createStore(reducers,compose(
   applyMiddleware(thunk),
  
  
@@ -31,9 +32,8 @@ ReactDom.render(
           <div>
             <AuthRoute></AuthRoute>
             <Route path = '/login'component = {Login}></Route> 
-            <Route path = '/register'component = {Register}></Route> 
+            <Route path = '/register'component = {newRegister}></Route> 
           </div>
-        
         </BrowserRouter> 
       </Provider>),
       document.getElementById('root')

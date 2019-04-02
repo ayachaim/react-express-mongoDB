@@ -15,7 +15,6 @@ class Login extends React.Component {
   }
   //路由跳转到register
   register () {
-    console.log(this.props)
     this.props.history.push('/register')
   }
   render () {
