@@ -1,9 +1,14 @@
 import axios from 'axios'
-//type
+import {
+  getRedirectPath
+} from '../util.js'
+//action
 const REGISTER_SUC = 'REGISTER_SUC'
+const LOGIN_SUC = 'LOGIN_SUC'
 const ERROR_MSG = 'ERROR_MSG'
-//用户初始状态action
+//用户初始状态state
 const initState={
+  redirectTo:'',
   isAuth:false,
   msg:'',
   user:'',
@@ -16,8 +21,17 @@ export function user(state=initState,action){
     case REGISTER_SUC:
     return {
       ...state,
+      redirectTo: getRedirectPath(action.payload),
       isAuth: true,
       msg: '',
+      ...action.payload
+    }
+    case LOGIN_SUC:
+    return {
+      ...state,
+      redirectTo:getRedirectPath(action.payload),
+      isAuth:true,
+      msg:'',
       ...action.payload
     }
     case ERROR_MSG:
@@ -29,22 +43,46 @@ export function user(state=initState,action){
     return state
   }
 }
-//成功信息
+//login成功信息
+function loginSuc(data){
+  return {
+    type:LOGIN_SUC,
+    payload:data
+  }
+}
+//register成功信息
 function registerSuc(data){
   return {
     type: REGISTER_SUC,
     payload:data 
   }
 }
-//报错信息
+//register报错信息
 function errorMSG(msg){
   return {
     msg,
     type: ERROR_MSG
   }
 }
-
-//验证用户密码和type
+//login页面验证账号密码
+export function login({user,pwd}){
+  if(!user||!pwd){
+    return errorMSG('用户名密码必须输入')
+  }
+  return dispatch => {
+   axios.post('/user/login',{user,pwd})
+    .then(res=>{
+      //验证响应并返回成功或错误信息
+      if(res.status===200 && res.data.code===1){
+        dispatch(loginSuc(res.data.data))
+      }else{
+        //后端定义错误信息
+        dispatch(errorMSG(res.data.msg))
+      }
+    })
+  }
+}
+//refister页面验证用户信息
 export function register({user,pwd,repeatpwd,type}){
   if(!user||!pwd||!type){
     return errorMSG('未输入用户密码！')

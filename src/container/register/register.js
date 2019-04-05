@@ -1,8 +1,9 @@
 import React from 'react'
 import Logo from '../../component/logo/logo'
-import {List,InputItem,Radio,WingBlank,WhiteSpace,Button} from 'antd-mobile'
+import {List,InputItem,Radio,WhiteSpace,Button} from 'antd-mobile'
 import {connect} from 'react-redux'
 import {register} from '../../redux/user.redux'
+import{Redirect} from 'react-router-dom'
 
 //映射关系
 const mapStateToProps=state=>{
@@ -38,8 +39,8 @@ class Register extends React.Component {
     const RadioItem = Radio.RadioItem
     return ( 
       <div> 
+      {this.props.redirecTo?<Redirect to={this.props.redirecTo}/>:null}
         <Logo></Logo>
-        <h2>注册页</h2>
         <List>
         {this.props.msg?<p className='err-msg'>{this.props.msg}</p>:null}
           <InputItem placeholder="请输入用户名" onChange={v=>this.HandleChange('user',v)}>用户</InputItem>
