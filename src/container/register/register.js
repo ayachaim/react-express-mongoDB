@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {register} from '../../redux/user.redux'
 import{Redirect} from 'react-router-dom'
 
+
 //映射关系
 const mapStateToProps=state=>{
   return state.user
@@ -39,7 +40,7 @@ class Register extends React.Component {
     const RadioItem = Radio.RadioItem
     return ( 
       <div> 
-      {this.props.redirecTo?<Redirect to={this.props.redirecTo}/>:null}
+      {this.props.redirectTo?<Redirect to={this.props.redirectTo} />:null}
         <Logo></Logo>
         <List>
         {this.props.msg?<p className='err-msg'>{this.props.msg}</p>:null}

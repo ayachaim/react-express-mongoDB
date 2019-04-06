@@ -2,8 +2,8 @@
 
 * * *
 
-## 项目运行
-
+## 项目运行  
+  
 * * *
 >1.执行npm install安装依赖包  
 >2.前端启动 npm start  
@@ -11,17 +11,25 @@
 >4.安装mongoDB数据库  
 
 * * *
->数据库写入查看页面 localhost:8888/user/list  
+>数据库写入数据查看页面 localhost:8888/user/list      
 
-### 
+###   
 
 * * *
 >后端返回  
->>1.code:0 注册成功  
->>2.code:1 登录成功  
+>code：状态码  
+>>1.code:0 成功      
+>>2.code:1 错误      
+>data：具体数据    
+>msg：错误信息    
+
+## 加密
+>加密使用MD5+salt，第三方库utility  
+>`npm install utility --save`  
 
 
-##npm依赖
+
+npm依赖  
 -------------------------------
 ##利用官方脚手架创建的依赖
 > ```create-react-app```  
@@ -53,4 +61,13 @@
 >connect(mapStateToProps, mapDispatchToProps)（）可以把ui组件链接到外部组件上  
 >>mapStateToProps: 建立一个从（外部的）state对象到（UI组件的）props对象的映射关系。    
 >>mapDispatchToProps:   建立UI组件的参数到store.dispatch方法的映射  
+
+* * *
+>bug：  
+1.      
+![82f63c70fdfe3ba4fca4559e447e39d8.png](en-resource://database/386:0)  
+后端代码用户注册数据入库重复    
+2.  
+![603ab73dba6a3212e8e51c05cad5c837.jpeg](en-resource://database/388:0)    
+返回了errormessage，并未前台并未显示提示内容      
 

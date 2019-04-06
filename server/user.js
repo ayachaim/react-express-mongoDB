@@ -3,6 +3,10 @@ const utils = require('utility')
 const Router=express.Router()
 const models=require('./mongo.js')
 const User=models.getModel('user')
+const _filter = {
+  'pwd': 0,
+  '__v':0
+}
 //MD5+salt重新加密
 function MD5pwd(pwd){
   const salt='fuck_your_mother_bastard'
@@ -19,10 +23,12 @@ Router.get('/list',function(req,res){
 //获取/login页面user登录信息,查询密码后隐藏密码
 Router.post('/login',function(req,res){
   const {user,pwd}=req.body
-  User.findOne({user,pwd:MD5pwd(pwd)},{'pwd':0},function(err,doc){
+  User.findOne({user,pwd:MD5pwd(pwd)},_filter,function(err,doc){
     if(!doc){
       return res.json({code:1,msg:'用户不存在或者密码错误'})
     }
+    //写入cookie
+    res.cookie('userid',doc._id)
       return res.json({code:0,data:doc})
     })
   })
@@ -30,26 +36,41 @@ Router.post('/login',function(req,res){
 
 //获取/register页面user注册信息
 Router.post('/register',function(req,res){
-  
   const {user,pwd,type}=req.body
   //查询一次user是否已注册
-  User.findOne({user},function(err,doc){
-    if(doc){
+  User.findOne({user,type,pwd},function(err,doc){
+    if(err){
       return res.json({code:1,msg:'用户名重复'})
     }
     //没注册就创建一个新的user 数据入库加密为MD5
-    User.create({user,type,pwd:MD5pwd(pwd)},function(err,doc){
+    const userModel=new User({user,type,pwd:MD5pwd(pwd)})
+    userModel.save(function(err,doc){
       if(err){
-        return res.json({code:1,msg:'后端出错了'})
+        return res.json({code:1,msg:'后端出错'})
       }
-      //注册成功
-      return res.json({code:0})
+      const {user,type,_id}=doc 
+      res.cookie('userid',_id)
+      return res.json({code:0,data:{user,type,_id}})
+    })
     })
   })
-})
+
 //route:user/info
 Router.get('/info',function(req,res){
   //用户是否有cookie,code=1，返回json
-  return res.json({code:1})
+  const {userid}=req.cookies
+  if(!userid){
+    return res.json({code:1})
+  }
+  User.findOne({_id:userid},_filter,function(err,doc){
+    if(err){
+      return res.json({code:1,msg:'后端出错'})
+    }
+    if(doc){
+      return res.json({code:0,data:doc})
+    }
+    
+  })
+  
 })
 module.exports=Router

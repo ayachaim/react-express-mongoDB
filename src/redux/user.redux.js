@@ -5,6 +5,7 @@ import {
 //action
 const REGISTER_SUC = 'REGISTER_SUC'
 const LOGIN_SUC = 'LOGIN_SUC'
+const LOAD_DATA = 'LOAD_DATA'
 const ERROR_MSG = 'ERROR_MSG'
 //用户初始状态state
 const initState={
@@ -12,7 +13,6 @@ const initState={
   isAuth:false,
   msg:'',
   user:'',
-  pwd:'',
   type:''
 }
 //user reduce
@@ -34,14 +34,23 @@ export function user(state=initState,action){
       msg:'',
       ...action.payload
     }
+    case LOAD_DATA:
+    return {
+      ...state,
+      ...action.payload
+    }
     case ERROR_MSG:
     return {
       ...state,
       isAuth:false,
-      msg:action.msg}
+      msg:action.msg,
+    }
     default:
     return state
   }
+}
+export function loadData(userinfo){
+  return {type:LOAD_DATA,payload:userinfo}
 }
 //login成功信息
 function loginSuc(data){

@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
-//user/info
+import {loadData} from '../../redux/user.redux'
+import {connect} from 'react-redux'
 
+const mapStateToProps=state=>{return state.user}
+const mapDispatchToProps={loadData}
 class AuthRoute extends React.Component{
   componentDidMount(){
     const object=['/login','/register']
@@ -18,8 +21,9 @@ class AuthRoute extends React.Component{
       res=>{
         if(res.status===200){
           console.log(res.data)
-          if(res.data.code===10){
+          if(res.data.code===0){
             //有登录信息
+            this.props.loadData(res.data.data)
           }else{
             this.props.history.push('/login')
           }
@@ -28,10 +32,10 @@ class AuthRoute extends React.Component{
     )
   }
   render(){
-    return <h2>后端响应</h2>
+    return null
   }
-  
-  
-  
 }
-export default withRouter(AuthRoute)
+const withAuth = withRouter(AuthRoute)
+const newAuth = connect(mapStateToProps, mapDispatchToProps)(withAuth)
+
+export default newAuth
