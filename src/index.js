@@ -11,16 +11,17 @@ import {
 } from 'react-redux'
 import {
   BrowserRouter,
-  Route,
- 
+  Route, 
+  Switch
 } from 'react-router-dom'
-import AuthRoute from './component/authroute/authroute'
+import NewAuth from './component/authroute/authroute'
 import './index.css'
 import './config'
-import Login from './container/login/login';
+import newLogin from './container/login/login';
 import newRegister from './container/register/register';
 import reducers from './reducers'
-import BossInfo from './container/bossinfo/bossinfo.js'
+
+import newBossinfo from './container/bossinfo/bossinfo.js';
 
 const store = createStore(reducers,compose(
   applyMiddleware(thunk),
@@ -32,11 +33,14 @@ ReactDom.render(
     (<Provider store = {store}>
         <BrowserRouter>
           <div>
-            <Route path='/bossinfo' component={BossInfo}></Route>
+          <NewAuth></NewAuth>
+          
+            <Route path='/bossinfo' component={newBossinfo}></Route>
             <Route path='/qianchenginfo'></Route>
-            <Route path = '/login'component = {Login}></Route> 
+            <Route path = '/login'component = {newLogin}></Route> 
             <Route path = '/register'component = {newRegister}></Route> 
-          </div>
+          
+        </div>
         </BrowserRouter> 
       </Provider>),
       document.getElementById('root')

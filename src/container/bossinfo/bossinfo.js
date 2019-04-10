@@ -1,21 +1,27 @@
 import React from 'react'
 import {NavBar, InputItem,TextareaItem,Button} from 'antd-mobile'
 import Avatar from '../../component/avatar/avatar'
+import {connect} from 'react-redux'
+import {update} from '../../redux/user.redux'
 //navbar导航栏 avatar头像选择 
 class BossInfo extends React.Component{
   constructor(props){
     super(props)
+   
   }
   onChange(k,v){
     this.setState({
       [k]:v
     })
   }
+  updata(){
+
+  }
   render(){
     return(
     <div>
       <NavBar
-      mode="light"
+      mode="dark"
     >Boss完善信息页面</NavBar>
     <Avatar Avatar={imgname=>{
       this.setState({
@@ -30,9 +36,19 @@ class BossInfo extends React.Component{
       autoHeight
       title='职业要求'
     ></TextareaItem>
-    <Button type='primary'>保存</Button>
+    <Button 
+      onClick={()=>{this.props.update(this.state)}}
+      type='primary'>保存</Button>
     </div>
     )
   }
 }
-export default BossInfo
+const mapStateToProps=(state)=>{
+  return state.user
+}
+const mapDispatchToProps = {
+  update
+}
+const newBossinfo = connect(mapStateToProps, mapDispatchToProps)(BossInfo)
+
+export default newBossinfo

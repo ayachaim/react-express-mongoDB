@@ -36,6 +36,6 @@ class AuthRoute extends React.Component{
   }
 }
 const withAuth = withRouter(AuthRoute)
-const newAuth = connect(mapStateToProps, mapDispatchToProps)(withAuth)
+const NewAuth = connect(mapStateToProps, mapDispatchToProps)(withAuth)
 
-export default newAuth
+export default NewAuth

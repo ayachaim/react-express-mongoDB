@@ -3,14 +3,13 @@ import {
   getRedirectPath
 } from '../util.js'
 //action
-const REGISTER_SUC = 'REGISTER_SUC'
-const LOGIN_SUC = 'LOGIN_SUC'
+const AUTH_SUC = 'AUTH_SUC'
+
 const LOAD_DATA = 'LOAD_DATA'
 const ERROR_MSG = 'ERROR_MSG'
 //用户初始状态state
 const initState={
   redirectTo:'',
-  isAuth:false,
   msg:'',
   user:'',
   type:''
@@ -18,20 +17,11 @@ const initState={
 //user reduce
 export function user(state=initState,action){
   switch(action.type){
-    case REGISTER_SUC:
+    case AUTH_SUC:
     return {
       ...state,
       redirectTo: getRedirectPath(action.payload),
-      isAuth: true,
       msg: '',
-      ...action.payload
-    }
-    case LOGIN_SUC:
-    return {
-      ...state,
-      redirectTo:getRedirectPath(action.payload),
-      isAuth:true,
-      msg:'',
       ...action.payload
     }
     case LOAD_DATA:
@@ -53,24 +43,32 @@ export function loadData(userinfo){
   return {type:LOAD_DATA,payload:userinfo}
 }
 //login成功信息
-function loginSuc(data){
+function authSuc(data) {
   return {
-    type:LOGIN_SUC,
+    type: AUTH_SUC,
     payload:data
   }
 }
-//register成功信息
-function registerSuc(data){
-  return {
-    type: REGISTER_SUC,
-    payload:data 
-  }
-}
+
 //register报错信息
 function errorMSG(msg){
   return {
     msg,
     type: ERROR_MSG
+  }
+}
+//bossinfo update请求
+export function update(data){
+  return dispatch=>{
+    axios.post('/user/update',data)
+    .then(res=>{
+       if (res.status === 200 && res.data.code === 1) {
+         dispatch(authSuc(res.data.data))
+       } else {
+           
+         dispatch(errorMSG(res.data.msg))
+       }
+    })
   }
 }
 //login页面验证账号密码
@@ -83,7 +81,7 @@ export function login({user,pwd}){
     .then(res=>{
       //验证响应并返回成功或错误信息
       if(res.status===200 && res.data.code===1){
-        dispatch(loginSuc(res.data.data))
+        dispatch(authSuc(res.data.data))
       }else{
         //后端定义错误信息
         dispatch(errorMSG(res.data.msg))
@@ -104,7 +102,7 @@ export function register({user,pwd,repeatpwd,type}){
     .then(res=>{
       //验证响应并返回成功或错误信息
       if(res.status===200 && res.data.code===1){
-        dispatch(registerSuc({user,pwd,type}))
+        dispatch(authSuc({user,pwd,type}))
       }else{
         //后端定义错误信息
         dispatch(errorMSG(res.data.msg))
