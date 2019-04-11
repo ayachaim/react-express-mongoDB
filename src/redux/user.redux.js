@@ -32,7 +32,7 @@ export function user(state=initState,action){
     case ERROR_MSG:
     return {
       ...state,
-      isAuth:false,
+     
       msg:action.msg,
     }
     default:
@@ -43,7 +43,8 @@ export function loadData(userinfo){
   return {type:LOAD_DATA,payload:userinfo}
 }
 //login成功信息
-function authSuc(data) {
+function authSuc(obj) {
+  const {pwd,...data}=obj
   return {
     type: AUTH_SUC,
     payload:data
@@ -80,10 +81,11 @@ export function login({user,pwd}){
    axios.post('/user/login',{user,pwd})
     .then(res=>{
       //验证响应并返回成功或错误信息
-      if(res.status===200 && res.data.code===1){
+      if(res.status===200 && res.data.code===0){
         dispatch(authSuc(res.data.data))
       }else{
         //后端定义错误信息
+        console.log(res.data.msg)
         dispatch(errorMSG(res.data.msg))
       }
     })

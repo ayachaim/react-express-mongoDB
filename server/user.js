@@ -28,7 +28,7 @@ Router.post('/login',function(req,res){
       return res.json({code:1,msg:'用户不存在或者密码错误'})
     }
     //写入cookie
-    res.cookie('userid',doc._id)
+      res.cookie('userid',doc._id)
       return res.json({code:0,data:doc})
     })
   })
