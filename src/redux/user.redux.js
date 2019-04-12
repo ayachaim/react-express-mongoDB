@@ -63,8 +63,9 @@ export function update(data){
   return dispatch=>{
     axios.post('/user/update',data)
     .then(res=>{
-       if (res.status === 200 && res.data.code === 1) {
+       if (res.status === 200 && res.data.code === 0) {
          dispatch(authSuc(res.data.data))
+      
        } else {
            
          dispatch(errorMSG(res.data.msg))

@@ -20,6 +20,23 @@ Router.get('/list',function(req,res){
     return res.json(doc)
   })
 })
+//updata接口,如果cokie有用户id，就返回成功，没有就返回code:1
+Router.post('/update',function(req,res){
+  const userid=req.cookies.userid
+  if(!userid){
+    return JSON.stringify({code:1})
+  }
+    const body=req.body
+    User.findByIdAndUpdate(userid,body,function(err,doc){
+      const data=Object.assign({},{
+        userid:doc.user,
+        type:doc.type
+      },body)
+   return res.json({code:0,data})
+  }
+)
+})
+
 //获取/login页面user登录信息,查询密码后隐藏密码
 Router.post('/login',function(req,res){
   const {user,pwd}=req.body
