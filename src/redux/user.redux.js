@@ -45,6 +45,7 @@ export function loadData(userinfo){
 //login成功信息
 function authSuc(obj) {
   const {pwd,...data}=obj
+  console.log(...obj)
   return {
     type: AUTH_SUC,
     payload:data
@@ -86,7 +87,7 @@ export function login({user,pwd}){
         dispatch(authSuc(res.data.data))
       }else{
         //后端定义错误信息
-        console.log(res.data.msg)
+        
         dispatch(errorMSG(res.data.msg))
       }
     })
@@ -103,7 +104,7 @@ export function register({user,pwd,repeatpwd,type}){
   return dispatch=>{
     axios.post('/user/register',{user,pwd,type})
     .then(res=>{
-      //验证响应并返回成功或错误信息
+      //验证响应并返回成功或错误信息   
       if(res.status===200 && res.data.code===1){
         dispatch(authSuc({user,pwd,type}))
       }else{

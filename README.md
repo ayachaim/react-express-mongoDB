@@ -64,14 +64,22 @@ npm依赖
 
 * * *
 >bug：  
-1.        
+1.   
+>后端代码用户注册数据入库重复    
+
 ![image](images/1.png)
-后端代码用户注册数据入库重复    
+
+
+* * *
+
 2.   
+>返回了errormessage，并未前台并未显示提示内容   
+
 ![image](images/2.jpg)  
-返回了errormessage，并未前台并未显示提示内容      
+     
 
 * * *
 mongodb数据库报错
 >前台post请求得不到响应，查看了后台代码，后台报错mongodb使用了最新的字符串解析器，查看文档后补充代码，仍然报错connect fail ，原因是进程一直在运行数据库，关机后被锁定，mongod实例化path使用cmd重新写入路径，最后重启mongod和mongo  
+
 ![image](images/3.jpg)  
