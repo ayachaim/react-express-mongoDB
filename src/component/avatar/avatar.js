@@ -3,6 +3,7 @@ import React from 'react'
 import {Grid,List} from 'antd-mobile'
 import PropTypes from 'prop-types'
 class Avatar extends React.Component{
+  //对于传入avatar组件参数的静态检查
   static propTypes={
     Avatar: PropTypes.func.isRequired
   }

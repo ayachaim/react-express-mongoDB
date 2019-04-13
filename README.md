@@ -1,4 +1,4 @@
-# react全家桶+express+mongoDB
+# react全家桶+express+mongoDB开发移动端求职网站
 
 * * *
 
@@ -92,3 +92,4 @@ mongodb数据库报错
 >前台post请求得不到响应，查看了后台代码，后台报错mongodb使用了最新的字符串解析器，查看文档后补充代码，仍然报错connect fail ，原因是进程一直在运行数据库，关机后被锁定，mongod实例化path使用cmd重新写入路径，最后重启mongod和mongo  
 
 ![image](images/3.jpg)  
+
