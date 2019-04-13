@@ -4,6 +4,7 @@ import Avatar from '../../component/avatar/avatar'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {update} from '../../redux/user.redux'
+
 //navbar导航栏 avatar头像选择 
 class BossInfo extends React.Component{
   constructor(props){
@@ -33,6 +34,7 @@ class BossInfo extends React.Component{
     <NavBar
       mode="dark"
     >Boss完善信息页面</NavBar>
+    
     <Avatar Avatar={imgname=>{
       this.setState({
         avatar:imgname

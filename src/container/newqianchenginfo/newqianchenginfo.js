@@ -4,6 +4,7 @@ import Avatar from '../../component/avatar/avatar'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {update} from '../../redux/user.redux'
+import Boss from '../../component/logo/boss'
 //navbar导航栏 avatar头像选择 
 class  Qianchenginfo extends React.Component{
   constructor(props){
@@ -30,13 +31,14 @@ class  Qianchenginfo extends React.Component{
     <NavBar
       mode="dark"
     >求职者完善信息页</NavBar>
+    <Boss></Boss>
     
     <Avatar Avatar={imgname=>{
       this.setState({
         avatar:imgname
       })
     }}></Avatar>
-    <InputItem onChange={v=>this.onChange('title',v)}>招聘职位</InputItem>
+    <InputItem onChange={v=>this.onChange('title',v)}>求职职位</InputItem>
     
     
     <TextareaItem onChange={v=>this.onChange('desc',v)}

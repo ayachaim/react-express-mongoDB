@@ -27,6 +27,9 @@
 >加密使用MD5+salt，第三方库utility  
 >`npm install utility --save`  
 
+## 静态检查
+>React可以通过第三方库prop-types，使用static方法定义类型，防止传入的类型不正确，并抛出一个err  
+>`npm i prop-types --save`  
 
 
 npm依赖  
@@ -60,7 +63,13 @@ npm依赖
 >conbinreducer可以合并多个reduce,并返回一个新的reducer  
 >connect(mapStateToProps, mapDispatchToProps)（）可以把ui组件链接到外部组件上  
 >>mapStateToProps: 建立一个从（外部的）state对象到（UI组件的）props对象的映射关系。    
->>mapDispatchToProps:   建立UI组件的参数到store.dispatch方法的映射  
+>>mapDispatchToProps:   建立UI组件的参数到store.dispatch方法的映射   
+>>前端屏蔽pwd，通过从返回data中分离pwd  
+>>
+`const {pwd,...data}=obj`  
+
+
+
 
 * * *
 >bug：  

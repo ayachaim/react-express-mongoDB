@@ -44,6 +44,7 @@ export function loadData(userinfo){
 }
 //login成功信息
 function authSuc(obj) {
+  //屏蔽password，从data主体中清除
   const {pwd,...data}=obj
   
   return {

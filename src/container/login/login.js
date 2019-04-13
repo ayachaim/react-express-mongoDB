@@ -53,11 +53,13 @@ class Login extends React.Component {
          {this.props.msg?<p className='err-msg'>{this.props.msg}</p>:null}
           <InputItem onChange={v=>this.HandleChange('user',v)}>用户</InputItem>
           <WhiteSpace />
+         
           <InputItem type='password' onChange={v=>this.HandleChange('pwd',v)}>密码</InputItem>
           <WhiteSpace />
         </List>
         <WingBlank>
           <Button onClick={this.handleLogin} type='primary'>登录</Button>
+          
           <WhiteSpace />
           <Button onClick={this.register} type='primary'>注册</Button>
         </WingBlank>
