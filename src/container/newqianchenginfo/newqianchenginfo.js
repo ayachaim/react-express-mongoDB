@@ -5,14 +5,11 @@ import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {update} from '../../redux/user.redux'
 //navbar导航栏 avatar头像选择 
-class BossInfo extends React.Component{
+class  Qianchenginfo extends React.Component{
   constructor(props){
     super(props)
     this.state={
      title:'',
-     avatar:'',
-     company:'',
-     money:'',
      desc:''
    }
   }
@@ -32,19 +29,20 @@ class BossInfo extends React.Component{
     {redirect && redirect!==path ? <Redirect to={this.props.redirectTo}></Redirect> : null}
     <NavBar
       mode="dark"
-    >Boss完善信息页面</NavBar>
+    >求职者完善信息页</NavBar>
+    
     <Avatar Avatar={imgname=>{
       this.setState({
         avatar:imgname
       })
     }}></Avatar>
     <InputItem onChange={v=>this.onChange('title',v)}>招聘职位</InputItem>
-    <InputItem onChange={v=>this.onChange('company',v)}>公司名称</InputItem>
-    <InputItem onChange={v=>this.onChange('money',v)}>职位薪资</InputItem>
+    
+    
     <TextareaItem onChange={v=>this.onChange('desc',v)}
       rows={3}
       autoHeight
-      title='职业要求'
+      title='个人简介'
     ></TextareaItem>
     <Button 
       onClick={()=>{this.props.update(this.state)}}
@@ -59,6 +57,6 @@ const mapStateToProps=(state)=>{
 const mapDispatchToProps = {
   update
 }
-const newBossinfo = connect(mapStateToProps, mapDispatchToProps)(BossInfo)
+const newQianchenginfo = connect(mapStateToProps, mapDispatchToProps)(Qianchenginfo)
 
-export default newBossinfo
+export default newQianchenginfo

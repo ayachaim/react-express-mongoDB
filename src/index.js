@@ -19,6 +19,7 @@ import './index.css'
 import './config'
 import newLogin from './container/login/login';
 import newRegister from './container/register/register';
+import newQianchenginfo from './container/newqianchenginfo/newqianchenginfo';
 import reducers from './reducers'
 
 import newBossinfo from './container/bossinfo/bossinfo.js';
@@ -34,9 +35,9 @@ ReactDom.render(
         <BrowserRouter>
           <div>
           <NewAuth></NewAuth>
-          
+            
             <Route path='/bossinfo' component={newBossinfo}></Route>
-            <Route path='/qianchenginfo'></Route>
+            <Route path='/qianchenginfo' component={newQianchenginfo}></Route>
             <Route path = '/login'component = {newLogin}></Route> 
             <Route path = '/register'component = {newRegister}></Route> 
           

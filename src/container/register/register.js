@@ -56,7 +56,7 @@ class Register extends React.Component {
           <RadioItem 
             onChange={()=>this.HandleChange('type','qiancheng')}
             checked={this.state.type==='qiancheng'} >
-            前程无忧
+            求职者
           </RadioItem>
           <WhiteSpace />
           <Button type='primary' onClick={this.handleRigister}>注册</Button>

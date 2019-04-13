@@ -45,7 +45,7 @@ export function loadData(userinfo){
 //login成功信息
 function authSuc(obj) {
   const {pwd,...data}=obj
-  console.log(...obj)
+  
   return {
     type: AUTH_SUC,
     payload:data
@@ -55,7 +55,7 @@ function authSuc(obj) {
 //register报错信息
 function errorMSG(msg){
   return {
-    msg,
+    ...msg,
     type: ERROR_MSG
   }
 }
@@ -105,7 +105,7 @@ export function register({user,pwd,repeatpwd,type}){
     axios.post('/user/register',{user,pwd,type})
     .then(res=>{
       //验证响应并返回成功或错误信息   
-      if(res.status===200 && res.data.code===1){
+      if(res.status===200 && res.data.code===0){
         dispatch(authSuc({user,pwd,type}))
       }else{
         //后端定义错误信息

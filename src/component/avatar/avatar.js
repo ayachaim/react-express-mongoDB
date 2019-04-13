@@ -1,10 +1,17 @@
 //头像选择组件
 import React from 'react'
 import {Grid,List} from 'antd-mobile'
+import PropTypes from 'prop-types'
 class Avatar extends React.Component{
+  static propTypes={
+    Avatar: PropTypes.func.isRequired
+  }
+  
   constructor(props){
     super(props)
-    this.state={}
+    this.state={
+
+    }
   }
   
   render(){
@@ -14,7 +21,8 @@ class Avatar extends React.Component{
                                       <img src={this.state.icon} style={{width:20}} alt=''></img>
                                       </div>)
                                       :<div style={{color:'black',background:'#FF6347'}}>请选择一个头像☹</div>
-    return(
+    //子组件调用ele.text
+      return(                             
       <div>
       {gridHeader}
       <List>
