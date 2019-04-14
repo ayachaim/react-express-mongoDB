@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { NavBar } from 'antd-mobile';
+import NavLink from '../../component/navlink/navlink'
 
 //取到redux里state
 const mapStateToProps=(state)=>{
@@ -23,6 +24,7 @@ class Dashboard extends React.Component{
     //router组件直接获取props，非router组件请用withrouter
       const user=this.props.user
       const {pathname}=this.props.location
+      console.log(pathname)
       const navList = [
         {
           path:'/boss',
@@ -50,14 +52,15 @@ class Dashboard extends React.Component{
         {
            path: '/me',
            text: '个人中心',
-           icon: 'msg',
+           icon: 'me',
            title: '个人中心',
            component: Me,
         }
       ]
       return (
-        <div>
-          <NavBar mode='dark'>{navList.find(v=>v.path==pathname).title}</NavBar>
+        <div >
+          <NavBar mode='dark' >{navList.find(v=>v.path===pathname).title}</NavBar>
+          <NavLink  data={navList}></NavLink>
         </div>
       )
   }

@@ -27,7 +27,7 @@ import newBossinfo from './container/bossinfo/bossinfo.js';
 
 const store = createStore(reducers,compose(
   applyMiddleware(thunk),
-	window.devToolsExtension?window.devToolsExtension():f=>f
+	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
  
  
 ))
@@ -36,12 +36,13 @@ ReactDom.render(
         <BrowserRouter>
           <div>
           <NewAuth></NewAuth>
-            
+            <Switch>
             <Route path='/bossinfo' component={newBossinfo}></Route>
             <Route path='/qianchenginfo' component={newQianchenginfo}></Route>
             <Route path = '/login' component = {newLogin}></Route> 
             <Route path = '/register' component = {newRegister}></Route> 
             <Route component={NewDashboard}></Route>
+            </Switch>
         </div>
         </BrowserRouter> 
       </Provider>),

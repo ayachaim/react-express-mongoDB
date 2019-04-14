@@ -2,3 +2,13 @@
   color: red;
   padding-left:5px;
 }
+.am-tab-bar-item {
+  position: fixed;
+  top:1;
+  width:100%;
+}
+.am-tab-bar {
+  position: fixed;
+  bottom:0;
+  width:100%
+}
