@@ -2,9 +2,9 @@
   color: red;
   padding-left:5px;
 }
-.am-tab-bar-item {
+.am-tab-bar-item .fixed-header {
   position: fixed;
-  top:1;
+  top:0;
   width:100%;
 }
 .am-tab-bar {

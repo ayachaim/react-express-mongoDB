@@ -12,12 +12,13 @@ function MD5pwd(pwd){
   const salt='fuck_your_mother_bastard'
   return utils.md5(utils.md5(salt+pwd))
 }
-//获取数据库用户注册信息
+//获取数据库用户注册信息,注意返回隐藏pwd和文档类型，key值可以取_id的值
 Router.get('/list',function(req,res){
-  //清除数据库内容
+  const {type}=req.query
+  //清除数据库数据
   //User.remove({},function(e,d){})
-  User.find({},function(err,doc){
-    return res.json(doc)
+  User.find({type},_filter,function(err,doc){
+    return res.json({code:0,data:doc})
   })
 })
 //updata接口,如果cokie有用户id，就返回成功，没有就返回code:1

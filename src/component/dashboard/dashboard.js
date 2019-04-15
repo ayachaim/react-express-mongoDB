@@ -1,15 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { NavBar } from 'antd-mobile';
+import {Route,Switch} from 'react-router-dom'
 import NavLink from '../../component/navlink/navlink'
-
+import Boss from '../../container/boss/boss'
 //取到redux里state
 const mapStateToProps=(state)=>{
   return state
 }
-function Boss(){
-  return <h2>boss</h2>
-}
+
 function Qiancheng(){
   return <h2>应聘page</h2>
 }
@@ -59,7 +58,14 @@ class Dashboard extends React.Component{
       ]
       return (
         <div >
-          <NavBar mode='dark' >{navList.find(v=>v.path===pathname).title}</NavBar>
+          <NavBar mode='dark' className='fixed-header'>{navList.find(v=>v.path===pathname).title}</NavBar>
+          <div>
+          <Switch>
+          {navList.map(v=>(
+            <Route  key={v.path} path={v.path} component={v.component}></Route>
+          ))}
+          </Switch>
+          </div>
           <NavLink  data={navList}></NavLink>
         </div>
       )
