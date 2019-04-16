@@ -2,12 +2,12 @@ import React from 'react'
 import {getUserList} from '../../redux/charuser.redux'
 
 import {connect} from 'react-redux'
-import UserCard from '../../component/usercard/usercard'
+import UserCard from '../usercard/usercard'
 
-class newBoss extends React.Component{
+class NewQiancheng extends React.Component{
  
   componentDidMount(){
-   this.props.getUserList('qiancheng')
+   this.props.getUserList('boss')
   }
   render(){
     return (
@@ -19,5 +19,5 @@ const mapStateToProps=state=>{
   return state.chatuser
 }
 const mapDispatchToProps={getUserList}
-const Boss = connect(mapStateToProps, mapDispatchToProps)(newBoss)
-export default Boss
+const QianCheng = connect(mapStateToProps, mapDispatchToProps)(NewQiancheng)
+export default QianCheng

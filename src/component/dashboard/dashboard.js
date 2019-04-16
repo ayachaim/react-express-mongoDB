@@ -4,14 +4,13 @@ import { NavBar } from 'antd-mobile';
 import {Route,Switch} from 'react-router-dom'
 import NavLink from '../../component/navlink/navlink'
 import Boss from '../../container/boss/boss'
+import QianCheng from '../qiancheng/qiancheng'
 //取到redux里state
 const mapStateToProps=(state)=>{
   return state
 }
 
-function Qiancheng(){
-  return <h2>应聘page</h2>
-}
+
 function Msg(){
   return <h2>消息列表</h2>
 }
@@ -38,7 +37,7 @@ class Dashboard extends React.Component{
           text:'boss',
           icon:'job',
           title:'招聘列表',
-          component:Qiancheng,
+          component: QianCheng,
           hide:user.type==='boss'
         },
         {
