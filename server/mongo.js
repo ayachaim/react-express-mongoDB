@@ -29,7 +29,7 @@ const models ={
     //公司名
     'company':{'type':String,'require':true},
     //钱数
-    'monney':{'type':String,'require':true},
+    'money':{'type':String,'require':true},
   },
   chat:{
 

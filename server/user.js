@@ -73,7 +73,7 @@ Router.post('/register',function(req,res){
     })
   })
 
-//route:user/info
+//:user/info
 Router.get('/info',function(req,res){
   //用户是否有cookie,code=1，返回json
   const {userid}=req.cookies

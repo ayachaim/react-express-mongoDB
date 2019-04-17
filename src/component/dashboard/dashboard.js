@@ -5,6 +5,7 @@ import {Route,Switch} from 'react-router-dom'
 import NavLink from '../../component/navlink/navlink'
 import Boss from '../../container/boss/boss'
 import QianCheng from '../qiancheng/qiancheng'
+import Me from '../me/me'
 //取到redux里state
 const mapStateToProps=(state)=>{
   return state
@@ -14,9 +15,7 @@ const mapStateToProps=(state)=>{
 function Msg(){
   return <h2>消息列表</h2>
 }
-function Me(){
-  return <h2>个人中心</h2>
-}
+
 class Dashboard extends React.Component{
   render(){
     //router组件直接获取props，非router组件请用withrouter

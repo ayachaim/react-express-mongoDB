@@ -23,6 +23,11 @@
 >data：具体数据    
 >msg：错误信息    
 
+## 数据结构  
+
+![image](images/5.jpg)  
+
+
 ## 加密
 >加密使用MD5+salt，第三方库utility  
 >`npm install utility --save`  
@@ -72,7 +77,7 @@ npm依赖
 
 
 * * *
->bug：  
+## bug：  
 1.   
 >后端代码用户注册数据入库重复    
 
@@ -88,9 +93,10 @@ npm依赖
      
 
 * * *
-mongodb数据库报错
+3、mongodb数据库报错
 >前台post请求得不到响应，查看了后台代码，后台报错mongodb使用了最新的字符串解析器，查看文档后补充代码，仍然报错connect fail ，原因是进程一直在运行数据库，关机后被锁定，mongod实例化path使用cmd重新写入路径，最后重启mongod和mongo  
 
 ![image](images/3.jpg)  
-3、获取数据库用户注册信息,注意返回隐藏pwd和文档类型，key值可以取_id的值  
+4、请求返回了pwd  
+>获取数据库用户注册信息,注意返回隐藏pwd和文档类型，key值可以取_id的值  
 ![image](images/4.jpg)  
