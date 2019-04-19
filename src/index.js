@@ -22,9 +22,9 @@ import newRegister from './container/register/register';
 import newQianchenginfo from './container/newqianchenginfo/newqianchenginfo';
 import reducers from './reducers'
 import NewDashboard from './component/dashboard/dashboard'
-
+import Page404 from './component/page404/page404'
 import newBossinfo from './container/bossinfo/bossinfo.js';
-
+import Chat from './component/chat/chat'
 const store = createStore(reducers,compose(
   applyMiddleware(thunk),
 	window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
@@ -41,7 +41,9 @@ ReactDom.render(
             <Route path='/qianchenginfo' component={newQianchenginfo}></Route>
             <Route path = '/login' component = {newLogin}></Route> 
             <Route path = '/register' component = {newRegister}></Route> 
+            <Route path='/chat/:user' component={Chat}></Route>
             <Route component={NewDashboard}></Route>
+            <Route component={Page404}></Route>
             </Switch>
         </div>
         </BrowserRouter> 

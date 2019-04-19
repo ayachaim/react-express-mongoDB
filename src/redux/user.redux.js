@@ -4,7 +4,7 @@ import {
 } from '../util.js'
 //action
 const AUTH_SUC = 'AUTH_SUC'
-
+const LOGOUT = 'LOGOUT'
 const LOAD_DATA = 'LOAD_DATA'
 const ERROR_MSG = 'ERROR_MSG'
 //用户初始状态state
@@ -23,6 +23,10 @@ export function user(state=initState,action){
       redirectTo: getRedirectPath(action.payload),
       msg: '',
       ...action.payload
+    }
+    case LOGOUT:
+    return {
+      ...initState, redirectTo:'/login'
     }
     case LOAD_DATA:
     return {
@@ -114,4 +118,7 @@ export function register({user,pwd,repeatpwd,type}){
       }
     })
   }
+}
+export function logoutSub(){
+  return {type:LOGOUT}
 }
