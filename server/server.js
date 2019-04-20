@@ -13,7 +13,7 @@ io.on('connection',function(socket){
   socket.on('sendmsg',function(data){
   //socket.emit('recmsg',data)
   const {from,to,msg}=data
-  const chatid=[from,to].sort.join('_')
+  const chatid=[from,to].sort().join('_')
   Chat.create({chatid,from,to,content:msg},function(err,doc){
     io.emit('recmsg',Object.assign({},doc._doc))
   })
