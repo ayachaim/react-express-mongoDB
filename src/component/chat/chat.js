@@ -1,21 +1,27 @@
 import React from 'react'
 import {List,InputItem} from 'antd-mobile'
-import io from 'socket.io-client'
+import {connect} from 'react-redux'
+import {getMsg,getLetter,recMsg} from '../../redux/chat.redux'
 
-const socket=io('ws://localhost:8888')
-class Chat extends React.Component{
+class NewChat extends React.Component{
   constructor(props){
     super(props)
     this.state={text:'',msg:[]}
   }
   componentDidMount(){
-    socket.on('recmsg',data=>{
-      this.setState({msg:[...this.state.msg,data.text]})
+    this.props.getMsg()
+    this.props.recMsg()
+    //socket.on('recmsg',data=>{
+      //this.setState({msg:[...this.state.msg,data.text]})
      
-    })
+   
   }
   handleSub(){
-    socket.emit('sendmsg',{text:this.state.text})
+    const from=this.props.user._id
+    const to=this.props.match.params.user
+    const msg=this.state.text
+    this.props.getLetter({from,to,msg})
+    //socket.emit('sendmsg',{text:this.state.text})
     this.setState({text:''})
   }
   render(){
@@ -32,4 +38,11 @@ class Chat extends React.Component{
     </div>)
   }
 }
+const mapStateToProps=state=>{
+  return state
+}
+const mapDispatchToProps = {
+  getMsg, getLetter, recMsg
+}
+const Chat = connect(mapStateToProps, mapDispatchToProps)(NewChat)
 export default Chat

@@ -3,6 +3,7 @@ const utils = require('utility')
 const Router=express.Router()
 const models=require('./mongo.js')
 const User=models.getModel('user')
+const Chat=models.getModel('chat')
 const _filter = {
   'pwd': 0,
   '__v':0
@@ -72,6 +73,16 @@ Router.post('/register',function(req,res){
     })
     })
   })
+  //msg聊天信息
+Router.get('/getMsg',function(req,res){
+  const user=req.cookies.user
+  Chat.find({'$or':[{from:user,to:user}]},function(err,doc){
+    if(!err){
+      return res.json({code:0,msgs:doc})
+    }
+    
+  })
+})
 
 //:user/info
 Router.get('/info',function(req,res){
