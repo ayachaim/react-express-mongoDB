@@ -21,7 +21,7 @@ class Dashboard extends React.Component{
     //router组件直接获取props，非router组件请用withrouter
       const user=this.props.user
       const {pathname}=this.props.location
-      console.log(pathname)
+      
       const navList = [
         {
           path:'/boss',

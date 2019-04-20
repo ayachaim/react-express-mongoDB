@@ -40,7 +40,7 @@ class NMe extends React.Component{
         </Item>
        </List>
       <WhiteSpace></WhiteSpace>
-      <Button type='primary' onClick={this.logout}>追销</Button>
+      <Button type='primary' onClick={this.logout}></Button>
       
     </div>
     ):<Redirect to={this.props.redirectTo}/>)
