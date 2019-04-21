@@ -6,9 +6,13 @@ import NavLink from '../../component/navlink/navlink'
 import Boss from '../../container/boss/boss'
 import QianCheng from '../qiancheng/qiancheng'
 import Me from '../me/me'
+import {getMsg, recMsg} from '../../redux/chat.redux'
 //取到redux里state
 const mapStateToProps=(state)=>{
   return state
+}
+const mapDispatchToProps={
+  getMsg, recMsg
 }
 
 
@@ -17,6 +21,11 @@ function Msg(){
 }
 
 class Dashboard extends React.Component{
+  componentDidMount(){
+     this.props.getMsg()
+     this.props.recMsg()
+     
+  }
   render(){
     //router组件直接获取props，非router组件请用withrouter
       const user=this.props.user
@@ -63,11 +72,11 @@ class Dashboard extends React.Component{
             <Route key={v.path} path={v.path} component={v.component}></Route>
           ))}
           </Switch>
-          <NavLink  data={navList}></NavLink>
+          <NavLink data={navList}></NavLink>
         </div>
       )
   }
 }
-const NewDashboard = connect(mapStateToProps)(Dashboard)
+const NewDashboard = connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 
 export default NewDashboard

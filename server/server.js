@@ -1,6 +1,5 @@
 const express = require('express')
 const userRoute=require('./user')
-
 const bodyParser=require('body-parser')
 const cookieParser=require('cookie-parser')
 const app=express()
