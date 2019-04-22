@@ -2,14 +2,14 @@ import React from 'react'
 import {List,InputItem, NavBar,Icon} from 'antd-mobile'
 import {connect} from 'react-redux'
 import {getMsg,getLetter,recMsg} from '../../redux/chat.redux'
-
+import {getChatID} from '../../util'
 class NewChat extends React.Component{
   constructor(props){
     super(props)
     this.state={text:'',msg:[]}
   }
   componentDidMount(){
-    if(!this.props.chat.chatmsg.length){
+  if(!this.props.chat.chatmsg.length){
    this.props.getMsg()
    this.props.recMsg()
   }
@@ -23,16 +23,23 @@ class NewChat extends React.Component{
   }
   render(){
     const userid=this.props.match.params.user
+    console.log(userid)
     const users=this.props.chat.users
+    console.log(users)
     if(!users[userid]){
       return null
     }
+    const chatid = getChatID(userid,this.props.user._id)
+    console.log(chatid)
+    const chatmsgs = this.props.chat.chatmsg.filter(v=>v.chatid==chatid)
+    console.log(chatmsgs)
     return (
     <div>
-    <NavBar mode='dark' icon={<Icon type='left' />} onLeftClick={()=>{this.props.history.goBack()}}>
+    <NavBar mode='dark' icon={<Icon type='left'/>} onLeftClick={()=>{this.props.history.goBack()}}>
       {users[userid].name}
     </NavBar>
-    {this.props.chat.chatmsg.map(v=>{
+    {chatmsgs.map(v=>{
+      
       const avatar=require(`../img/${users[v.from].avatar}.png`)
       return v.from==userid?(
         <List key={v._id}>
@@ -41,7 +48,7 @@ class NewChat extends React.Component{
         
       ):(
         <List key={v._id}>
-          <List.Item extra={<img src={avatar} />}>{v.content}</List.Item>
+          <List.Item extra={<img src={avatar} alt=''/>}>{v.content}</List.Item>
         </List>
       )    
       }
@@ -56,10 +63,10 @@ class NewChat extends React.Component{
     </div>)
   }
 }
-const mapStateToProps=state=>{
+let mapStateToProps=state=>{
   return state
 }
-const mapDispatchToProps = {
+let mapDispatchToProps = {
   getLetter,getMsg,recMsg
 }
 const Chat = connect(mapStateToProps, mapDispatchToProps)(NewChat)

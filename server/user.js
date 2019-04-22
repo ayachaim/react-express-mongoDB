@@ -31,7 +31,7 @@ Router.post('/update',function(req,res){
     const body=req.body
     User.findByIdAndUpdate(userid,body,function(err,doc){
       const data=Object.assign({},{
-        userid:doc.user,
+        user:doc.user,
         type:doc.type
       },body)
    return res.json({code:0,data})
@@ -104,7 +104,6 @@ Router.get('/info',function(req,res){
     if(doc){
       return res.json({code:0,data:doc})
     }
-    
   })
   
 })
