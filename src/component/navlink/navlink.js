@@ -43,4 +43,4 @@ const mapStateToProps=state=>{
 }
 
 
-export default withRouter(connect(mapStateToProps)(NavLink))
+export default connect(mapStateToProps)(withRouter(NavLink))

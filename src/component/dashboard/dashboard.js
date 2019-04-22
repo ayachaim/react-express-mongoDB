@@ -12,7 +12,7 @@ const mapStateToProps=(state)=>{
   return state
 }
 const mapDispatchToProps={
-  getMsg, recMsg
+  getMsg,recMsg
 }
 
 
@@ -22,10 +22,11 @@ function Msg(){
 
 class Dashboard extends React.Component{
   componentDidMount(){
+    if (!this.props.chat.chatmsg.length) {
      this.props.getMsg()
      this.props.recMsg()
-     
   }
+}
   render(){
     //router组件直接获取props，非router组件请用withrouter
       const user=this.props.user
