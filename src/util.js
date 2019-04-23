@@ -1,11 +1,16 @@
-//根据用户完善信息 进行跳转到boss或者qiancheng
-export function getRedirectPath({type,avatar}){
-  let url=(type==='boss')?'/boss':'/qiancheng'
-  if(!avatar){
-     url+='info'
-  }
-  return url
+
+
+export function getRedirectPath({type, avatar}){
+	// 根据用户信息 返回跳转地址
+	// user.type /boss /genius
+	// user.avatar /bossinfo /geniusinfo 
+	let url = (type==='boss')?'/boss': '/genius'
+	if (!avatar) {
+		url += 'info'
+	}
+	return url
 }
-export function getChatID(userid,targetid){
-  return [userid,targetid].sort().join('_')
+
+export function getChatId(userId, targetId){
+	return [userId, targetId].sort().join('_')
 }

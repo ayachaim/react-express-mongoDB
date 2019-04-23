@@ -1,41 +1,42 @@
 import React from 'react'
 import axios from 'axios'
-import {withRouter} from 'react-router-dom'
-import {loadData} from '../../redux/user.redux'
-import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import { loadData } from '../../redux/user.redux'
+import { connect } from 'react-redux'
 
-const mapStateToProps=state=>{return state.user}
-const mapDispatchToProps={loadData}
+@withRouter
+@connect(
+	null,
+	{loadData}
+)
 class AuthRoute extends React.Component{
-  componentDidMount(){
-    const object=['/login','/register']
-    //location.pathname
-    const pathName=this.props.location.pathName
-    
-    //如果url是这两个，返回空
-    if(object.indexOf(pathName)>-1){
-      return null
-    }
-    //获取用户信息
-    axios.get('./user/info').then(
-      res=>{
-        if(res.status===200){
-          console.log(res.data)
-          if(res.data.code===0){
-            //有登录信息
-            this.props.loadData(res.data.data)
-          }else{
-            this.props.history.push('/login')
-          }
-        }
-      }
-    )
-  }
-  render(){
-    return null
-  }
-}
-const withAuth = withRouter(AuthRoute)
-const NewAuth = connect(mapStateToProps, mapDispatchToProps)(withAuth)
+	componentDidMount() {
+		const publicList = ['/login','/register']
+		const pathname = this.props.location.pathname
+		if (publicList.indexOf(pathname)>-1) {
+			return null
+		}
+		// 获取用户信息
+		axios.get('/user/info')
+			.then(res=>{
+				if (res.status==200) {
+					if (res.data.code==0) {
+						// 有登录信息de
+						this.props.loadData(res.data.data)
+					}else{
+						this.props.history.push('/login')
+					}
+				}
+			})
+		// 是否登录
+		// 现在的url地址  login是不需要跳转的
 
-export default NewAuth
+		// 用户的type 身份是boss还是牛人
+		// 用户是否完善信息（选择头像 个人简介）
+	}
+	render(){
+		return null
+	}
+
+}
+export default AuthRoute
